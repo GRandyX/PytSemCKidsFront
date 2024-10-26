@@ -1,53 +1,137 @@
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
-import splash from '../assets/splash.png';
-import { Scores } from './Scores';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'expo-router';
+import { Audio } from 'expo-av';
+
+import SplashImg from '../assets/splash.png';
+import BackgroundImg from '../assets/karolina_grabowska.jpg';
 import SpinnerStart from './SpinnerStart';
 
 export function Splash() {
 
+    // ######  VARS/CONSTANTS AREA  ######
+    const [duration, setDuration] = useState(1);
+    const [sound, setSound] = useState(null);
+	const [isPlaying, setIsPlaying] = useState(false);
     const [ progress, setProgress ] = useState(0);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setProgress(prev => {
-                let currentPercent = (prev < 100 ? prev + 5 : 100);
-
-                if (currentPercent === 100) {
-                    const interval2 = setInterval(() => {
-                        setProgress(0);
-                        clearInterval(interval2);
-                    }, 2000);
-                }
-
-                return currentPercent;
-            });
-        }, 250);
-
-        return () => clearInterval(interval);
-    }, []);
-
+    const intervalRef = useRef(null);
+    const router = useRouter();
     const stylesArgs = {
 
         title: {
             color: 'yellow',
-            fontSize: 42,
+            fontSize: 32,
             textAlign: 'center',
-            fontWeight: "bold"
+            fontWeight: "normal"
         },
+
+        welcome_msg: {
+            color: 'yellow',
+            fontSize: 46,
+            fontWeight: "bold",
+            textShadowColor: "red",
+            textShadowRadius: 25
+        }
 
     };
     const styles = StyleSheet.create(stylesArgs);
+    const soundsFileName = [
+        "AVideoGameShort.mp3",
+        "ByteBlast8BitArcadeMusicBackground.mp3",
+        "KlPeachGameOver.mp3",
+        "LevelViShort.mp3",
+        "RetroGameArcadeShort.mp3"
+    ];
+    //const idxRandom = Math.floor(Math.random() * ((soundsFileName.length - 1) - Math.ceil(0))) + Math.ceil(0);
+    //const dirPath = `../assets/music/${soundsFileName[parseInt(idxRandom)].trim()}`;
+    //const soundFileName = `${soundsFileName[parseInt(idxRandom)].trim()}`;
+    const soundFileName = "00.mp3";
+    let firstLoad = true;
 
+
+    // ######  USE EFFECT AREA  ######
+	useEffect(() => {
+
+        loadSound();
+
+		return () => {
+            if (sound) sound.unloadAsync();
+		};
+
+	}, []);
+
+    useEffect(() => {
+
+        if (sound != null && firstLoad) {
+
+            let timeOut = setTimeout( function () {
+                handlePlay();
+                firstLoad = false;
+
+                clearTimeout(timeOut);
+            }, 50 );
+
+        }
+
+	}, [duration]);
+
+
+    // ######  FUNCTIONS AREA  ######
+    const loadSound = async () => {
+
+		const { sound } = await Audio.Sound.createAsync( require("../assets/music/"+ soundFileName) );
+		setSound(sound);
+
+		const status = await sound.getStatusAsync();
+		setDuration(status.durationMillis);
+
+	};
+
+	const handlePlay = async () => {
+
+        if (!isPlaying) {
+
+            await sound.playAsync();
+            setIsPlaying(true);
+
+            intervalRef.current = setInterval(async () => {
+                const status = await sound.getStatusAsync();
+                const currentProgress = (status.positionMillis / duration) * 100;
+                setProgress(currentProgress);
+
+                if (status.didJustFinish || currentProgress === 100) {
+                    clearInterval(intervalRef.current);
+
+                    intervalRef.current = setTimeout( () => {
+                        clearInterval(intervalRef.current);
+
+                        router.navigate("/home");
+                    }, 250 );
+                }
+
+            }, 100);
+
+        }
+
+	};
+
+
+    // ######  VIEW AREA  ######
 	return (
 
-        <View className="bg-transparent row-auto p-8 m-8 rounded-xl flex flex-col justify-center align-middle items-center relative">
-            <Image source={splash} className="col-span-12 w-64 h-60"></Image>
+        <View className="justify-center align-middle items-center w-full h-full">
 
-            <Text style={styles.title} >Bienvenido a</Text>
-            <Text style={styles.title} >CalcuKID´S</Text>
+            <Image source={BackgroundImg} className="fixed top-0 left-0 z-0"></Image>
 
-            <SpinnerStart progress={progress} progressColor={"green"} textProgressC={"white"} />
+            <View className="absolute z-10 justify-center align-middle items-center">
+                <Image source={SplashImg} className="col-span-12 w-64 h-60"></Image>
+
+                <Text style={styles.title} >Bienvenido a</Text>
+                <Text style={styles.welcome_msg} >CALCUKID´S</Text>
+
+                <SpinnerStart progress={progress} progressColor={"green"} textProgressC={"white"} />
+            </View>
+
         </View>
 
 	);

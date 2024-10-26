@@ -10,9 +10,7 @@ export function Main() {
 
 	return (
         <View style={{paddingTop: insets.top, paddingBottom: insets.bottom}}>
-            <ScrollView>
-                <Splash />
-            </ScrollView>
+            <Text>Componente a eliminar</Text>
         </View>
 	);
 
