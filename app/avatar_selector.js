@@ -8,6 +8,7 @@ import { GamepadIco } from "./icons";
 import { Characters } from "./charsets";
 import { ScreenLayout } from "../Components/ScreenLayout";
 
+
 export default function AvatarSelector() {
 
     // ######  VARS/CONSTANTS AREA  ######
@@ -110,6 +111,20 @@ export default function AvatarSelector() {
         });
     };
 
+    const rendererPressableChar = (idChar, nameChar, source) => {
+        return <View key={idChar}>
+            <Pressable onPress={ () => { goToHome(idChar, nameChar) }}>
+                {
+                    ({ pressed }) => (
+                        <Image source={source} className="w-48 h-36 mt-5 top-0" style={{ opacity: pressed ? .4 : 1, objectFit: "contain" }} />
+                    )
+                }
+            </Pressable>
+
+            <Text className="text-center text-red-600 text-xl font-bold">{nameChar}</Text>
+        </View>
+    };
+
 
     // ######  VIEW AREA  ######
     return (
@@ -127,19 +142,11 @@ export default function AvatarSelector() {
 
             <View className="flex-row flex-wrap justify-center">
                 {
-                    Characters.map( (character, idx) => (
-                        <Pressable key={character.id} onPress={ () => { goToHome(character.id, character.name) }}>
-                            {
-                                ({ pressed }) => (
-                                    <Image source={character.source} className="w-48 h-36 mt-5 top-0" style={{ opacity: pressed ? .4 : 1, objectFit: "contain" }} />
-                                )
-                            }
-                        </Pressable>
-                    ))
+                    Characters.map( (character, idx) => ( rendererPressableChar(character.id, character.name, character.source) ) )
                 }
             </View>
 
-            <GamepadIco name="gamepad" className="my-5 text-black/25" size={98} />
+            <GamepadIco name="gamepad" className="my-5 text-black/25" size={36} />
 
         </ScreenLayout>
 

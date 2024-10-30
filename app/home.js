@@ -13,6 +13,7 @@ import SubIMG from '../assets/images/resta.png';
 import MultIMG from '../assets/images/multiplicacion.png';
 import DivIMG from '../assets/images/division.png';
 
+
 export default function Home() {
 
     // ######  VARS/CONSTANTS AREA  ######
@@ -42,13 +43,20 @@ export default function Home() {
 
     // ######  USE EFFECT AREA  ######
 	useEffect(() => {
-        console.log(nameChar);
+        //console.log(nameChar);
 	}, []);
 
 
     // ######  FUNCTIONS AREA  ######
-    const goToOptions = () => {
-        router.navigate("/avatar_selector");
+    const goToOptions = (operation) => {
+        router.navigate({
+            pathname: "options",
+            params: {
+                idChar: idChar,
+                nameChar: nameChar,
+                operation: operation
+            }
+        });
     };
 
 
@@ -72,7 +80,7 @@ export default function Home() {
             <View className="flex-row flex-wrap w-full h-full px-10 mt-5 justify-center">
 
                 <View className="mt-8">
-                    <Pressable onPress={goToOptions} className="flex-row flex-wrap bg-purple-700 w-full justify-between items-center rounded-2xl overflow-hidden">
+                    <Pressable onPress={ () => { goToOptions("Suma") } } className="flex-row flex-wrap bg-purple-700 w-full justify-between items-center rounded-2xl overflow-hidden">
 
                         <Text className="mt-1 py-10 px-2 w-auto h-auto left-2 text-white font-bold text-start" style={{ fontSize: 20 }}>
                             Suma
@@ -85,7 +93,7 @@ export default function Home() {
                 </View>
 
                 <View className="mt-8">
-                    <Pressable onPress={goToOptions} className="flex-row flex-wrap bg-orange-700 w-full justify-between items-center rounded-2xl overflow-hidden">
+                    <Pressable onPress={ () => { goToOptions("Resta") } } className="flex-row flex-wrap bg-orange-700 w-full justify-between items-center rounded-2xl overflow-hidden">
 
                         <Text className="mt-1 py-10 px-2 w-auto h-auto left-2 text-white font-bold text-start" style={{ fontSize: 20 }}>
                             Resta
@@ -98,7 +106,7 @@ export default function Home() {
                 </View>
 
                 <View className="mt-8">
-                    <Pressable onPress={goToOptions} className="flex-row flex-wrap bg-green-700 w-full justify-between items-center rounded-2xl overflow-hidden">
+                    <Pressable onPress={ () => { goToOptions("Multiplicación") } } className="flex-row flex-wrap bg-green-700 w-full justify-between items-center rounded-2xl overflow-hidden">
 
                         <Text className="mt-1 py-10 px-2 w-auto h-auto left-2 text-white font-bold text-start" style={{ fontSize: 20 }}>
                             Multiplicación
@@ -111,7 +119,7 @@ export default function Home() {
                 </View>
 
                 <View className="mt-8">
-                    <Pressable onPress={goToOptions} className="flex-row flex-wrap bg-yellow-700 w-full justify-between items-center rounded-2xl overflow-hidden">
+                    <Pressable onPress={ () => { goToOptions("División") } } className="flex-row flex-wrap bg-yellow-700 w-full justify-between items-center rounded-2xl overflow-hidden">
 
                         <Text className="mt-1 py-10 px-2 w-auto h-auto left-2 text-white font-bold text-start" style={{ fontSize: 20 }}>
                             División
