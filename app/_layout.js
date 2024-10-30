@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import Logo from '../assets/splash.png';
+import Title from '../assets/images/title.png';
 
 export default function Layout() {
 
@@ -25,17 +26,18 @@ export default function Layout() {
     // ######  VIEW AREA  ######
     return (
 
-        <View className="flex-1 justify-center">
+        <View className="flex-1">
             <Stack
                 screenOptions={{
-                    headerStyle: { backgroundColor: "brown" },
+                    headerStyle: { backgroundColor: "white" },
                     headerTintColor: "transparent",
+                    header: () => {},
                     headerTitle: "",
                     headerLeft: () => (
                         <Image source={Logo} className="col-span-12 w-12 h-12"></Image>
                     ),
                     headerRight: () => (
-                        <Text style={styles.title} >CALCUKID´S</Text>
+                        <Image source={Title} className="col-span-12 w-44 h-10"></Image>
                     )
                 }}
             />

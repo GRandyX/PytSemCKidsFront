@@ -4,8 +4,9 @@ import { useRouter } from 'expo-router';
 import { Audio } from 'expo-av';
 
 import SplashImg from '../assets/splash.png';
-import BackgroundImg from '../assets/karolina_grabowska.jpg';
+import Title from '../assets/images/curve_title.png';
 import SpinnerStart from './SpinnerStart';
+import { ScreenLayout } from './ScreenLayout';
 
 export function Splash() {
 
@@ -119,20 +120,16 @@ export function Splash() {
     // ######  VIEW AREA  ######
 	return (
 
-        <View className="justify-center align-middle items-center w-full h-full">
+        <ScreenLayout justifyContent={true} alignItems={true}>
 
-            <Image source={BackgroundImg} className="fixed top-0 left-0 z-0"></Image>
-
-            <View className="absolute z-10 justify-center align-middle items-center">
-                <Image source={SplashImg} className="col-span-12 w-64 h-60"></Image>
-
-                <Text style={styles.title} >Bienvenido a</Text>
-                <Text style={styles.welcome_msg} >CALCUKID´S</Text>
+            <View className="justify-center items-center">
+                <Image source={Title} className="w-full h-14" style={{ objectFit: "contain" }}></Image>
+                <Image source={SplashImg} className="w-full h-60 my-10" style={{ objectFit: "contain" }}></Image>
 
                 <SpinnerStart progress={progress} progressColor={"green"} textProgressC={"white"} />
             </View>
 
-        </View>
+        </ScreenLayout>
 
 	);
 
