@@ -105,8 +105,7 @@ export function Splash() {
 
                     intervalRef.current = setTimeout( () => {
                         clearInterval(intervalRef.current);
-
-                        router.navigate("/home");
+                        router.navigate("/avatar_selector");
                     }, 250 );
                 }
 

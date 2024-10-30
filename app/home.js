@@ -3,18 +3,19 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useRouter } from "expo-router";
 import { Audio } from 'expo-av';
 
-import { GamepadIco } from "./icons";
-import { char01, char02, char03, char04, char05 } from "./charsets";
-import BackgroundImg from '../assets/karolina_grabowska.jpg';
-//import { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
+import { CircleALeft, GamepadIco } from "./icons";
+import { useRoute } from "@react-navigation/native";
+import { ScreenLayout } from "../Components/ScreenLayout";
+import { ScreenHeader } from "../Components/ScreenHeader";
+
+import AddIMG from '../assets/images/suma.png';
+import SubIMG from '../assets/images/resta.png';
+import MultIMG from '../assets/images/multiplicacion.png';
+import DivIMG from '../assets/images/division.png';
 
 export default function Home() {
 
     // ######  VARS/CONSTANTS AREA  ######
-    const [duration, setDuration] = useState(1);
-    const [sound, setSound] = useState(null);
-    const [touchSound, setTouchSound] = useState(null);
-	const [isPlaying, setIsPlaying] = useState(false);
     const stylesArgs = {
 
         title: {
@@ -34,150 +35,99 @@ export default function Home() {
 
     };
     const styles = StyleSheet.create(stylesArgs);
-    const soundFileName = "01.mp3";
-    const soundTFileName = "01.mp3";
     const router = useRouter();
-    //const handPosition = useSharedValue(0);
-    let firstLoad = true;
+    const route = useRoute();
+    const { idChar, nameChar  } = route.params;
 
 
     // ######  USE EFFECT AREA  ######
 	useEffect(() => {
-
-        loadSound();
-
-		return () => {
-            if (sound) sound.unloadAsync();
-            if (touchSound) touchSound.unloadAsync();
-		};
-
+        console.log(nameChar);
 	}, []);
-
-    useEffect(() => {
-
-        if (sound != null && firstLoad) {
-
-            let timeOut = setTimeout( function () {
-                handlePlay();
-                firstLoad = false;
-
-                clearTimeout(timeOut);
-            }, 50 );
-
-        }
-
-	}, [duration]);
 
 
     // ######  FUNCTIONS AREA  ######
-    const loadSound = async () => {
-
-        // Background Sound
-		const { sound } = await Audio.Sound.createAsync(
-            require("../assets/music/"+ soundFileName),
-            { isLooping: true }
-        );
-		setSound(sound);
-
-		const status = await sound.getStatusAsync();
-		setDuration(status.durationMillis);
-
-        // Touch Sound
-        const { tSound } = await Audio.Sound.createAsync( require("../assets/sounds/"+ soundTFileName) );
-		setTouchSound(tSound);
-
-	};
-
-	const handlePlay = async () => {
-
-        if (!isPlaying) {
-
-            await sound.playAsync();
-            setIsPlaying(true);
-
-        }
-
-	};
-
-    const playTouchSound = async () => {
-        if (touchSound) await touchSound.replayAsync();
+    const goToOptions = () => {
+        router.navigate("/avatar_selector");
     };
-
-    const selectCharacter = (idCharacter) => {
-        console.log( idCharacter );
-        router.navigate("game", { idCharacter });
-    };
-
-    //const animatedHandStyle = useAnimatedStyle(() => {
-    //    return {
-    //        transform: [{ translateY: handPosition.value }],
-    //    };
-    //});
-
-    //const handlePress = () => {
-    //        handPosition.value = withTiming(30, { duration: 150 }, () => {
-    //        handPosition.value = withTiming(0, { duration: 150 });
-    //    });
-    //};
 
 
     // ######  VIEW AREA  ######
     return (
 
-        <View className="w-full h-full">
+        <ScreenLayout>
 
-            <Image source={BackgroundImg} className="fixed top-0 left-0 z-0"></Image>
+            <ScreenHeader idChar={idChar} />
 
-            <View className="absolute z-10 justify-center align-middle items-center bg-transparent">
-
-                <Text className="bg-black/25 text-xl mt-12 p-5 w-40 rounded-xl text-white font-bold text-center">
-                    Toca
+            <View className="flex-col flex-wrap w-full px-5">
+                <Text className="mt-5 py-1 px-2 w-full h-auto left-2 text-black font-bold text-start" style={{ fontSize: 18 }}>
+                    ¡Hola!
                 </Text>
 
-                <View className="flex-row justify-center align-middle items-center mt-10 flex-wrap">
-                    <Pressable onPress={ () => { selectCharacter(1) }}>
-                        {
-                            ({ pressed }) => (
-                                <Image source={char01} className="w-40 h-40" style={{ opacity: pressed ? .4 : 1 }} />
-                            )
-                        }
+                <Text className="mt-1 py-1 px-2 w-full h-auto left-2 text-yellow-600 font-bold text-start" style={{ fontSize: 18 }}>
+                    ¿Qué aprenderemos hoy?
+                </Text>
+            </View>
+
+            <View className="flex-row flex-wrap w-full h-full px-10 mt-5 justify-center">
+
+                <View className="mt-8">
+                    <Pressable onPress={goToOptions} className="flex-row flex-wrap bg-purple-700 w-full justify-between items-center rounded-2xl overflow-hidden">
+
+                        <Text className="mt-1 py-10 px-2 w-auto h-auto left-2 text-white font-bold text-start" style={{ fontSize: 20 }}>
+                            Suma
+                        </Text>
+
+                        <View className="bg-purple-300 w-44 h-full -z-10 rounded-full -right-10"></View>
                     </Pressable>
-                    <Pressable onPress={ () => { selectCharacter(2) }}>
-                        {
-                            ({ pressed }) => (
-                                <Image source={char02} className="w-40 h-40" style={{ opacity: pressed ? .4 : 1 }} />
-                            )
-                        }
-                    </Pressable>
-                    <Pressable onPress={ () => { selectCharacter(3) }}>
-                        {
-                            ({ pressed }) => (
-                                <Image source={char03} className="w-40 h-40" style={{ opacity: pressed ? .4 : 1 }} />
-                            )
-                        }
-                    </Pressable>
-                    <Pressable onPress={ () => { selectCharacter(4) }}>
-                        {
-                            ({ pressed }) => (
-                                <Image source={char04} className="w-40 h-40" style={{ opacity: pressed ? .4 : 1 }} />
-                            )
-                        }
-                    </Pressable>
-                    <Pressable onPress={ () => { selectCharacter(5) }}>
-                        {
-                            ({ pressed }) => (
-                                <Image source={char05} className="w-40 h-40" style={{ opacity: pressed ? .4 : 1 }} />
-                            )
-                        }
-                    </Pressable>
+
+                    <Image source={AddIMG} className="absolute z-10 w-32 h-32 -right-5 -top-5" style={{ objectFit: "contain", borderRadius: 100 }} />
                 </View>
 
-                <GamepadIco name="gamepad" className="m-5" size={98} color="white" />
+                <View className="mt-8">
+                    <Pressable onPress={goToOptions} className="flex-row flex-wrap bg-orange-700 w-full justify-between items-center rounded-2xl overflow-hidden">
 
+                        <Text className="mt-1 py-10 px-2 w-auto h-auto left-2 text-white font-bold text-start" style={{ fontSize: 20 }}>
+                            Resta
+                        </Text>
+
+                        <View className="bg-orange-300 w-44 h-full -z-10 rounded-full -right-10"></View>
+                    </Pressable>
+
+                    <Image source={SubIMG} className="absolute z-10 w-32 h-32 -right-5 -top-5" style={{ objectFit: "contain", borderRadius: 100 }} />
+                </View>
+
+                <View className="mt-8">
+                    <Pressable onPress={goToOptions} className="flex-row flex-wrap bg-green-700 w-full justify-between items-center rounded-2xl overflow-hidden">
+
+                        <Text className="mt-1 py-10 px-2 w-auto h-auto left-2 text-white font-bold text-start" style={{ fontSize: 20 }}>
+                            Multiplicación
+                        </Text>
+
+                        <View className="bg-green-300 w-44 h-full -z-10 rounded-full -right-10"></View>
+                    </Pressable>
+
+                    <Image source={MultIMG} className="absolute z-10 w-32 h-32 -right-5 -top-5" style={{ objectFit: "contain", borderRadius: 100 }} />
+                </View>
+
+                <View className="mt-8">
+                    <Pressable onPress={goToOptions} className="flex-row flex-wrap bg-yellow-700 w-full justify-between items-center rounded-2xl overflow-hidden">
+
+                        <Text className="mt-1 py-10 px-2 w-auto h-auto left-2 text-white font-bold text-start" style={{ fontSize: 20 }}>
+                            División
+                        </Text>
+
+                        <View className="bg-yellow-300 w-44 h-full -z-10 rounded-full -right-10"></View>
+                    </Pressable>
+
+                    <Image source={DivIMG} className="absolute z-10 w-32 h-32 -right-5 -top-5" style={{ objectFit: "contain", borderRadius: 100 }} />
+                </View>
+
+                <GamepadIco name="gamepad" className="mt-5 text-black/25" size={85} />
             </View>
 
 
-        </View>
+        </ScreenLayout>
 
     );
 
