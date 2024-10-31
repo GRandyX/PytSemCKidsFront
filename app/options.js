@@ -42,7 +42,7 @@ export default function Options() {
 
     // ######  USE EFFECT AREA  ######
 	useEffect(() => {
-        console.log(operation);
+        //console.log(operation);
 	}, []);
 
 
@@ -85,26 +85,26 @@ export default function Options() {
             <View className="flex-row flex-wrap w-full h-full px-10 mt-5 justify-center">
 
                 <View className="mt-8">
-                    <Pressable onPress={goToLearn} className="flex-row flex-wrap bg-purple-700 w-full justify-between items-center rounded-2xl overflow-hidden">
+                    <Pressable onPress={goToLearn} className="flex-row flex-wrap bg-purple-700 w-full justify-between items-center rounded-2xl overflow-hidden active:opacity-25">
 
                         <Text className="mt-1 py-10 px-2 w-auto h-auto left-2 text-white font-bold text-start" style={{ fontSize: 20 }}>
                             Aprende
                         </Text>
 
-                        <View className="bg-purple-300 w-44 h-full -z-10 rounded-full -right-10"></View>
+                        <View className="bg-purple-300 w-44 h-full -z-10 -right-10" style={{ borderTopLeftRadius: 100, borderBottomLeftRadius: 20 }}></View>
                     </Pressable>
 
                     <Image source={LearnIMG} className="absolute z-10 w-32 h-32 -right-5 -top-5" style={{ objectFit: "contain", borderRadius: 100 }} />
                 </View>
 
                 <View className="mt-12">
-                    <Pressable onPress={goToPractice} className="flex-row flex-wrap bg-orange-700 w-full justify-between items-center rounded-2xl overflow-hidden">
+                    <Pressable onPress={goToPractice} className="flex-row flex-wrap bg-orange-700 w-full justify-between items-center rounded-2xl overflow-hidden active:opacity-25">
 
                         <Text className="mt-1 py-10 px-2 w-auto h-auto left-2 text-white font-bold text-start" style={{ fontSize: 20 }}>
                             Practica
                         </Text>
 
-                        <View className="bg-orange-300 w-44 h-full -z-10 rounded-full -right-10"></View>
+                        <View className="bg-orange-300 w-44 h-full -z-10 -right-10" style={{ borderTopLeftRadius: 100, borderBottomLeftRadius: 20 }}></View>
                     </Pressable>
 
                     <Image source={PracticeIMG} className="absolute z-10 w-32 h-32 -right-5 -top-5" style={{ objectFit: "contain", borderRadius: 100 }} />

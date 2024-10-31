@@ -19,7 +19,7 @@ export function ScreenHeader({idChar}) {
     const renderCharacter = (id) => {
         return <Pressable onPress={goToAvatarSelector}>
             {({ pressed }) => (
-                <Image source={Characters[id - 1].source} className="w-14 h-14 left-3 top-0 bg-cyan-400" style={{ objectFit: "contain", borderRadius: 100 }} />
+                <Image source={Characters[id - 1].source} className="w-14 h-14 left-3 top-0 bg-cyan-400" style={{ objectFit: "contain", borderRadius: 100, opacity: pressed ? .25 : 1 }} />
             )}
         </Pressable>
     };
