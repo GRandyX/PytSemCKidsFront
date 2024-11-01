@@ -286,7 +286,7 @@ export default function Practice() {
                         <EqualsIco name="equals" className="text-red-800 text-center font-bold my-2 mx-3" size={72} />
                     </View>
 
-                    <Text className="flex text-black font-bold text-5xl text-red-800">{resultOp}</Text>
+                    <Text className="flex font-bold text-5xl text-red-800">{resultOp}</Text>
 
                 </View>
             </View>

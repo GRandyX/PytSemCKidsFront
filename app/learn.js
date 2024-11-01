@@ -1,5 +1,5 @@
 /** REACT NATIVE IMPORTS */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text, StyleSheet } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -8,6 +8,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenHeader } from "../Components/ScreenHeader";
 import { PressableBack } from "../Components/PressableBack";
 import { LearnAddition } from "../Components/learn_addition";
+import { LearnSubtraction } from '../Components/learn_subtraction';
+import { LearnMultiplication } from '../Components/learn_multiplication';
+import { LearnDivision } from '../Components/learn_division';
 
 /** OWNER IMAGES IMPORTS */
 import { GamepadIco } from "./icons";
@@ -32,24 +35,66 @@ export default function Learn() {
             fontSize: 35
         },
 
-        welcome_msg: {
-            color: 'yellow',
-            fontSize: 46,
-            fontWeight: "bold",
-            textShadowColor: "red",
-            textShadowRadius: 25
-        }
+        sub_title: {
+            color: 'rgba(161,98,7, 1)',
+            width: "100%",
+            fontSize: 25,
+            fontWeight: "bold"
+        },
+
+        content: {
+            color: 'rgba(161,98,7, 1)',
+            width: "100%",
+            fontSize: 19,
+            fontWeight: "normal",
+            textAlign: "justify"
+        },
+
+        image: {
+            position: 'relative',
+            width: 50,
+            height: 50,
+            marginTop: 0,
+            marginBottom: 0
+        },
 
     };
     const styles = StyleSheet.create(stylesArgs);
     const route = useRoute();
     const { idChar, nameChar, operation  } = route.params;
+    const [ learnInfoView, setLearnInfoView ] = useState(null);
 
 
     // ######  USE EFFECT AREA  ######
+    useEffect(() => {
+        getLearnInfo();
+    }, []);
 
 
     // ######  FUNCTIONS AREA  ######
+    const getLearnInfo = () => {
+        let view = [];
+
+        switch (operation) {
+            case "Suma":
+                view.push( <LearnAddition /> );
+                break;
+
+            case "Resta":
+                view.push( <LearnSubtraction /> );
+                break;
+
+            case "Multiplicación":
+                view.push( <LearnMultiplication /> );
+                break;
+
+            default:
+                view.push( <LearnDivision /> );
+                break;
+        }
+
+        setLearnInfoView(view);
+    };
 
 
     // ######  VIEW AREA  ######
@@ -64,14 +109,13 @@ export default function Learn() {
 
                 <View className="flex-col flex-wrap w-full h-full py-3 bg-black/10">
                     <Text className="py-5" style={styles.title}>
-                    {operation}
-                </Text>
-            </View>
+                        {operation}
+                    </Text>
 
-            <View className="flex-row flex-wrap w-full h-full px-10 mt-5 justify-center">
+                    {learnInfoView}
 
-                <GamepadIco name="gamepad" className="mt-5 text-black/25" size={92} />
-            </View>
+                    <GamepadIco name="gamepad" className="mt-5 text-black/25 self-center" size={100} />
+                </View>
 
             </ScrollView>
         </View>
