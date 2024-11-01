@@ -1,12 +1,16 @@
-import { ScrollView, View, Text, Image, Pressable, StyleSheet, useAnimatedValue } from "react-native";
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useRouter } from "expo-router";
+/** REACT NATIVE IMPORTS */
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, Pressable } from "react-native";
+import { useRouter } from "expo-router";
 import { Audio } from 'expo-av';
 
-import Title from '../assets/images/curve_title.png';
+/** OWNER COMPONENTS IMPORTS */
+import { ScreenLayout } from "../Components/ScreenLayout";
+
+/** OWNER IMAGES IMPORTS */
 import { GamepadIco } from "./icons";
 import { Characters } from "./charsets";
-import { ScreenLayout } from "../Components/ScreenLayout";
+import Title from '../assets/images/curve_title.png';
 
 
 export default function AvatarSelector() {
@@ -14,29 +18,8 @@ export default function AvatarSelector() {
     // ######  VARS/CONSTANTS AREA  ######
     const [duration, setDuration] = useState(1);
     const [sound, setSound] = useState(null);
-    const [touchSound, setTouchSound] = useState(null);
 	const [isPlaying, setIsPlaying] = useState(false);
-    const stylesArgs = {
-
-        title: {
-            color: 'yellow',
-            fontSize: 32,
-            textAlign: 'center',
-            fontWeight: "normal"
-        },
-
-        welcome_msg: {
-            color: 'yellow',
-            fontSize: 46,
-            fontWeight: "bold",
-            textShadowColor: "red",
-            textShadowRadius: 25
-        }
-
-    };
-    const styles = StyleSheet.create(stylesArgs);
     const soundFileName = "01.mp3";
-    const soundTFileName = "01.mp3";
     const router = useRouter();
 
     let firstLoad = true;
@@ -49,7 +32,6 @@ export default function AvatarSelector() {
 
 		return () => {
             if (sound) sound.unloadAsync();
-            if (touchSound) touchSound.unloadAsync();
 		};
 
 	}, []);
@@ -83,10 +65,6 @@ export default function AvatarSelector() {
 		const status = await sound.getStatusAsync();
 		setDuration(status.durationMillis);
 
-        // Touch Sound
-        const { tSound } = await Audio.Sound.createAsync( require("../assets/sounds/"+ soundTFileName) );
-		setTouchSound(tSound);
-
 	};
 
 	const handlePlay = async () => {
@@ -99,10 +77,6 @@ export default function AvatarSelector() {
         }
 
 	};
-
-    const playTouchSound = async () => {
-        if (touchSound) await touchSound.replayAsync();
-    };
 
     const goToHome = (idChar, nameChar) => {
         router.navigate({

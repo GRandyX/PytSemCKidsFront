@@ -1,6 +1,8 @@
+/** REACT NATIVE IMPORTS */
 import { View, Image, Pressable } from "react-native";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 
+/** OWNER IMAGES IMPORTS */
 import { Characters } from "../app/charsets";
 import Title from '../assets/images/title.png';
 
@@ -9,6 +11,7 @@ export function ScreenHeader({idChar}) {
 
     // ######  VARS/CONSTANTS AREA  ######
     const router = useRouter();
+
 
     // ######  FUNCTIONS AREA  ######
     const goToAvatarSelector = () => {
@@ -27,7 +30,7 @@ export function ScreenHeader({idChar}) {
 
     return (
 
-        <View className="flex-row flex-wrap w-full py-2 justify-between bg-black/10">
+        <View className="flex-row flex-wrap w-full py-2 justify-between bg-yellow-100 fixed top-0" style={{ height: "100%", maxHeight: 70 }}>
             {renderCharacter(idChar)}
 
             <Image source={Title} className="w-36 h-14 left-0" style={{ objectFit: "contain" }} />

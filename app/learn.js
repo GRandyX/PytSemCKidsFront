@@ -1,28 +1,35 @@
-import { ScrollView, View, Text, Image, Pressable, StyleSheet, useAnimatedValue } from "react-native";
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useRouter } from "expo-router";
-import { Audio } from 'expo-av';
-
-import { CircleALeft, GamepadIco } from "./icons";
-import { Characters } from "./charsets";
+/** REACT NATIVE IMPORTS */
+import React from 'react';
+import { ScrollView, View, Text, StyleSheet } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { ScreenLayout } from "../Components/ScreenLayout";
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+/** OWNER COMPONENTS IMPORTS */
 import { ScreenHeader } from "../Components/ScreenHeader";
-import BackgroundImg from '../assets/images/bubbles.jpg';
-import LearnIMG from '../assets/images/aprender.png';
-import PracticeIMG from '../assets/images/practica.png';
+import { PressableBack } from "../Components/PressableBack";
+import { LearnAddition } from "../Components/learn_addition";
+
+/** OWNER IMAGES IMPORTS */
+import { GamepadIco } from "./icons";
 
 
 export default function Learn() {
 
     // ######  VARS/CONSTANTS AREA  ######
+    const insets = useSafeAreaInsets();
     const stylesArgs = {
 
         title: {
-            color: 'yellow',
-            fontSize: 32,
-            textAlign: 'center',
-            fontWeight: "normal"
+            borderBottomColor: 'rgba(161,98,7, 1)',
+            borderBottomWidth: 4,
+            borderBottomLeftRadius: 30,
+            borderBottomRightRadius: 30,
+            color: 'rgba(161,98,7, 1)',
+            textAlign: "center",
+            width: "100%",
+            maxWidth: "100%",
+            fontWeight: "bold",
+            fontSize: 35
         },
 
         welcome_msg: {
@@ -35,42 +42,28 @@ export default function Learn() {
 
     };
     const styles = StyleSheet.create(stylesArgs);
-    const router = useRouter();
     const route = useRoute();
     const { idChar, nameChar, operation  } = route.params;
 
 
     // ######  USE EFFECT AREA  ######
-	useEffect(() => {
-        //console.log(operation);
-	}, []);
 
 
     // ######  FUNCTIONS AREA  ######
-    const goToOptions = () => {
-        router.navigate({
-            pathname: "options",
-            params: { idChar, nameChar, operation }
-        });
-    };
 
 
     // ######  VIEW AREA  ######
     return (
 
-        <ScreenLayout>
-
+        <View className="w-full h-full" style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
             <ScreenHeader idChar={idChar} />
 
-            <View className="flex justify-center items-end w-full mt-5">
-                <Pressable onPress={goToOptions} className="bg-yellow-600 rounded-full w-15 right-5">
-                    {({ pressed }) => ( <CircleALeft size={32} color="black" style={{ opacity: pressed ? .5 : 1 }} /> )}
-                </Pressable>
-            </View>
+            <PressableBack idChar={idChar} nameChar={nameChar} operation={operation} path="options" />
 
-            <View className="flex-col flex-wrap w-full py-3" style={{ borderBottomColor: 'rgba(202,138,4, 1)', borderBottomWidth: 2 }}>
-                <Text className="w-full h-auto text-yellow-600 font-bold text-center text-2xl" style={{ textTransform: "uppercase" }}>
-                    Aprende la &nbsp;
+            <ScrollView>
+
+                <View className="flex-col flex-wrap w-full h-full py-3 bg-black/10">
+                    <Text className="py-5" style={styles.title}>
                     {operation}
                 </Text>
             </View>
@@ -80,7 +73,9 @@ export default function Learn() {
                 <GamepadIco name="gamepad" className="mt-5 text-black/25" size={92} />
             </View>
 
-        </ScreenLayout>
+            </ScrollView>
+        </View>
+
 
     );
 

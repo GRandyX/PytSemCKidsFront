@@ -1,14 +1,16 @@
-import { ScrollView, View, Text, Image, Pressable, StyleSheet, useAnimatedValue } from "react-native";
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useRouter } from "expo-router";
-import { Audio } from 'expo-av';
-
-import { CircleALeft, GamepadIco } from "./icons";
-import { Characters } from "./charsets";
+/** REACT NATIVE IMPORTS */
+import React from 'react';
+import { View, Text, Image, Pressable } from "react-native";
+import { useRouter } from "expo-router";
 import { useRoute } from "@react-navigation/native";
+
+/** OWNER COMPONENTS IMPORTS */
 import { ScreenLayout } from "../Components/ScreenLayout";
 import { ScreenHeader } from "../Components/ScreenHeader";
-import BackgroundImg from '../assets/images/bubbles.jpg';
+import { PressableBack } from "../Components/PressableBack";
+
+/** OWNER IMAGES IMPORTS */
+import { GamepadIco } from "./icons";
 import LearnIMG from '../assets/images/aprender.png';
 import PracticeIMG from '../assets/images/practica.png';
 
@@ -16,44 +18,15 @@ import PracticeIMG from '../assets/images/practica.png';
 export default function Options() {
 
     // ######  VARS/CONSTANTS AREA  ######
-    const stylesArgs = {
-
-        title: {
-            color: 'yellow',
-            fontSize: 32,
-            textAlign: 'center',
-            fontWeight: "normal"
-        },
-
-        welcome_msg: {
-            color: 'yellow',
-            fontSize: 46,
-            fontWeight: "bold",
-            textShadowColor: "red",
-            textShadowRadius: 25
-        }
-
-    };
-    const styles = StyleSheet.create(stylesArgs);
     const router = useRouter();
     const route = useRoute();
     const { idChar, nameChar, operation  } = route.params;
 
 
     // ######  USE EFFECT AREA  ######
-	useEffect(() => {
-        //console.log(operation);
-	}, []);
 
 
     // ######  FUNCTIONS AREA  ######
-    /*const backComp = () => {
-        router.navigate({
-            pathname: "home",
-            params: { idChar, nameChar }
-        });
-    };*/
-
     const goToLearn = () => {
         router.navigate({
             pathname: "learn",
@@ -75,6 +48,8 @@ export default function Options() {
         <ScreenLayout>
 
             <ScreenHeader idChar={idChar} />
+
+            <PressableBack idChar={idChar} nameChar={nameChar} path="home" styles={{ top: -25 }} />
 
             <View className="flex-col flex-wrap w-full px-5">
                 <Text className="mt-10 mb-5 w-full h-auto text-yellow-600 font-bold text-center text-3xl" style={{ textTransform: "uppercase" }}>
@@ -118,9 +93,3 @@ export default function Options() {
     );
 
 }
-
-/*
-    <Pressable onPress={backComp} className="absolute right-0 top-3 z-50 bg-yellow-500 rounded-full w-12">
-        {({ pressed }) => ( <CircleALeft size={42} color="black" /> )}
-    </Pressable>
-*/

@@ -1,26 +1,15 @@
-import { Slot, Stack } from "expo-router";
-import { View, Text, Image, StyleSheet } from "react-native";
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+/** REACT NATIVE IMPORTS */
+import { View, Image } from "react-native";
+import { Stack } from "expo-router";
 
+/** OWNER IMAGES IMPORTS */
 import Logo from '../assets/splash.png';
 import Title from '../assets/images/title.png';
+
 
 export default function Layout() {
 
     // ######  VARS/CONSTANTS AREA  ######
-    const stylesArgs = {
-
-        title: {
-            color: 'yellow',
-            fontSize: 24,
-            fontWeight: "bold",
-            textShadowColor: "red",
-            textShadowRadius: 25
-        }
-
-    };
-    const styles = StyleSheet.create(stylesArgs);
-    //const insets = useSafeAreaInsets();
 
 
     // ######  VIEW AREA  ######

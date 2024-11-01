@@ -1,13 +1,16 @@
-import { ScrollView, View, Text, Image, Pressable, StyleSheet, useAnimatedValue } from "react-native";
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useRouter } from "expo-router";
-import { Audio } from 'expo-av';
-
-import { CircleALeft, GamepadIco } from "./icons";
+/** REACT NATIVE IMPORTS */
+import React from 'react';
+import { View, Text, Image, Pressable } from "react-native";
+import { useRouter } from "expo-router";
 import { useRoute } from "@react-navigation/native";
+
+/** OWNER COMPONENTS IMPORTS */
 import { ScreenLayout } from "../Components/ScreenLayout";
 import { ScreenHeader } from "../Components/ScreenHeader";
+import { PressableBack } from "../Components/PressableBack";
 
+/** OWNER IMAGES IMPORTS */
+import { GamepadIco } from "./icons";
 import AddIMG from '../assets/images/suma.png';
 import SubIMG from '../assets/images/resta.png';
 import MultIMG from '../assets/images/multiplicacion.png';
@@ -17,34 +20,12 @@ import DivIMG from '../assets/images/division.png';
 export default function Home() {
 
     // ######  VARS/CONSTANTS AREA  ######
-    const stylesArgs = {
-
-        title: {
-            color: 'yellow',
-            fontSize: 32,
-            textAlign: 'center',
-            fontWeight: "normal"
-        },
-
-        welcome_msg: {
-            color: 'yellow',
-            fontSize: 46,
-            fontWeight: "bold",
-            textShadowColor: "red",
-            textShadowRadius: 25
-        }
-
-    };
-    const styles = StyleSheet.create(stylesArgs);
     const router = useRouter();
     const route = useRoute();
     const { idChar, nameChar  } = route.params;
 
 
     // ######  USE EFFECT AREA  ######
-	useEffect(() => {
-        //console.log(nameChar);
-	}, []);
 
 
     // ######  FUNCTIONS AREA  ######
@@ -64,8 +45,10 @@ export default function Home() {
     return (
 
         <ScreenLayout>
+            <PressableBack idChar={idChar} nameChar={nameChar} path="avatar_selector" styles={{ top: -25 }} />
 
             <ScreenHeader idChar={idChar} />
+
 
             <View className="flex-col flex-wrap w-full px-5">
                 <Text className="mt-5 py-1 px-2 w-full h-auto left-2 text-black font-bold text-start" style={{ fontSize: 18 }}>
