@@ -52,12 +52,12 @@ export function LearnAddition() {
 
 
     // ######  FUNCTIONS AREA  ######
-    const rendererIMGView = (random) => {
+    const rendererIMGView = (key, random) => {
         let view = [];
 
         for ( let idx = 0; idx < random; idx++ ) {
-            // key={"learn_add_img" + idx}
-            view.push( <Image source={PeachIMG} style={styles.image} /> );
+            let nKey = `${key}_img${idx + 1}`;
+            view.push( <Image key={nKey} source={PeachIMG} style={styles.image} /> );
         }
 
         return view;
@@ -92,7 +92,7 @@ export function LearnAddition() {
 
             <View className="flex-row flex-wrap justify-center w-full px-5" style={{ borderBottomWidth: 2, borderStyle: "dotted" }}>
                 <View className="flex-row flex-wrap justify-center items-center content-center" style={{ width: "40%", minHeight: 50 }}>
-                    {rendererIMGView(2)}
+                    {rendererIMGView("learn_add_val1", 2)}
                 </View>
 
                 <View style={{ width: "20%", minHeight: 50 }}>
@@ -100,21 +100,25 @@ export function LearnAddition() {
                 </View>
 
                 <View className="flex-row flex-wrap justify-center items-center content-center" style={{ width: "40%", minHeight: 50 }}>
-                    {rendererIMGView(3)}
+                    {rendererIMGView("learn_add_val2", 3)}
                 </View>
             </View>
 
             <View className="flex-row flex-wrap justify-center w-full px-5">
                 <View style={{ width: "20%", minHeight: 50 }}>
-                    <Text className="font-bold text-8xl text-center text-yellow-700"> = </Text>
+                    <Text className="font-bold text-8xl text-center text-yellow-700">
+                        =
+                    </Text>
                 </View>
 
                 <View className="flex-row flex-wrap justify-center items-center content-center" style={{ width: "80%", minHeight: 50 }}>
-                    {rendererIMGView(5)}
+                    {rendererIMGView("learn_add_val3", 5)}
                 </View>
             </View>
 
-            <Text className="font-bold text-6xl text-center text-yellow-700"> 2 + 3 = 5 </Text>
+            <Text className="font-bold text-6xl text-center text-yellow-700">
+                2 + 3 = 5
+            </Text>
 
             <Text className="py-2 px-8" style={styles.content}>
                 Así que, en total, tienes 5 duraznos. ¡Eso es sumar! Estás tomando dos grupos de duraznos y juntándolos para ver cuántas tienes en total.

@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image } from "react-native";
-import PeachIMG from '../assets/images/peach.png';
+import AppleIMG from '../assets/images/apple02.png';
 import VideoLayout from "./VideoLayout";
 
 
@@ -52,12 +52,12 @@ export function LearnDivision() {
 
 
     // ######  FUNCTIONS AREA  ######
-    const rendererIMGView = (random) => {
+    const rendererIMGView = (key, random) => {
         let view = [];
 
         for ( let idx = 0; idx < random; idx++ ) {
-            // key={"learn_div_img" + idx}
-            view.push( <Image source={PeachIMG} style={styles.image} /> );
+            let nKey = `${key}_img${idx + 1}`;
+            view.push( <Image key={nKey} source={AppleIMG} style={styles.image} /> );
         }
 
         return view;
@@ -94,7 +94,7 @@ export function LearnDivision() {
 
             <View className="flex-row flex-wrap justify-center w-full px-5" style={{ borderBottomWidth: 2, borderStyle: "dotted" }}>
                 <View className="flex-row flex-wrap justify-center items-center content-center" style={{ width: "40%", minHeight: 50 }}>
-                    {rendererIMGView(9)}
+                    {rendererIMGView("learn_div_val1", 9)}
                 </View>
 
                 <View style={{ width: "20%", minHeight: 50 }}>
@@ -102,7 +102,7 @@ export function LearnDivision() {
                 </View>
 
                 <View className="flex-row flex-wrap justify-center items-center content-center" style={{ width: "40%", minHeight: 50 }}>
-                    {rendererIMGView(3)}
+                    {rendererIMGView("learn_div_val2", 3)}
                 </View>
             </View>
 
@@ -112,14 +112,14 @@ export function LearnDivision() {
                 </View>
 
                 <View className="flex-row flex-wrap justify-center items-center content-center" style={{ width: "80%", minHeight: 50 }}>
-                    {rendererIMGView(3)}
+                    {rendererIMGView("learn_div_val3", 3)}
                 </View>
             </View>
 
             <Text className="font-bold text-6xl text-center text-yellow-700"> 9 / 3 = 3 </Text>
 
             <Text className="py-2 px-8" style={styles.content}>
-                Así que, debes dar a cada uno 3 manzanas. ¡Eso es dividir! Estás tomando el grupo de duraznos y los estas separando en partes iguales, para saber cuántas debes repartir.
+                Así que, debes dar a cada uno 3 manzanas. ¡Eso es dividir! Estás tomando el grupo de manzanas y los estas separando en partes iguales, para saber cuántas debes repartir.
             </Text>
 
             <View className="w-full" style={{ maxHeight: 225 }}>

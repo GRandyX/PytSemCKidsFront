@@ -52,12 +52,12 @@ export function LearnSubtraction() {
 
 
     // ######  FUNCTIONS AREA  ######
-    const rendererIMGView = (random) => {
+    const rendererIMGView = (key, random) => {
         let view = [];
 
         for ( let idx = 0; idx < random; idx++ ) {
-            // key={"learn_sub_img" + idx}
-            view.push( <Image source={AppleIMG} style={styles.image} /> );
+            let nKey = `${key}_img${idx + 1}`;
+            view.push( <Image key={nKey} source={AppleIMG} style={styles.image} /> );
         }
 
         return view;
@@ -93,7 +93,7 @@ export function LearnSubtraction() {
 
             <View className="flex-row flex-wrap justify-center w-full px-5" style={{ borderBottomWidth: 2, borderStyle: "dotted" }}>
                 <View className="flex-row flex-wrap justify-center items-center content-center" style={{ width: "40%", minHeight: 50 }}>
-                    {rendererIMGView(7)}
+                    {rendererIMGView("learn_sub_val1", 7)}
                 </View>
 
                 <View style={{ width: "20%", minHeight: 50 }}>
@@ -101,7 +101,7 @@ export function LearnSubtraction() {
                 </View>
 
                 <View className="flex-row flex-wrap justify-center items-center content-center" style={{ width: "40%", minHeight: 50 }}>
-                    {rendererIMGView(3)}
+                    {rendererIMGView("learn_sub_val2", 3)}
                 </View>
             </View>
 
@@ -111,7 +111,7 @@ export function LearnSubtraction() {
                 </View>
 
                 <View className="flex-row flex-wrap justify-center items-center content-center" style={{ width: "80%", minHeight: 50 }}>
-                    {rendererIMGView(4)}
+                    {rendererIMGView("learn_sub_val3", 4)}
                 </View>
             </View>
 

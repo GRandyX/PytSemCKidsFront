@@ -63,6 +63,13 @@ export default function Learn() {
     const route = useRoute();
     const { idChar, nameChar, operation  } = route.params;
     const [ learnInfoView, setLearnInfoView ] = useState(null);
+    const addViewKey = "learn_add_view1";
+    const viewsKeys = {
+        add: "learn_add_view1",
+        sub: "learn_sub_view1",
+        multi: "learn_mul_view1",
+        div: "learn_div_view1"
+    }
 
 
     // ######  USE EFFECT AREA  ######
@@ -77,19 +84,19 @@ export default function Learn() {
 
         switch (operation) {
             case "Suma":
-                view.push( <LearnAddition /> );
+                view.push( <LearnAddition key={viewsKeys.add} /> );
                 break;
 
             case "Resta":
-                view.push( <LearnSubtraction /> );
+                view.push( <LearnSubtraction key={viewsKeys.sub} /> );
                 break;
 
             case "Multiplicación":
-                view.push( <LearnMultiplication /> );
+                view.push( <LearnMultiplication key={viewsKeys.multi} /> );
                 break;
 
             default:
-                view.push( <LearnDivision /> );
+                view.push( <LearnDivision key={viewsKeys.div} /> );
                 break;
         }
 

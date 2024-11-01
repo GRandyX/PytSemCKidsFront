@@ -80,7 +80,10 @@ export function Splash() {
     // ######  FUNCTIONS AREA  ######
     const loadSound = async () => {
 
-		const { sound } = await Audio.Sound.createAsync( require("../assets/music/"+ soundFileName) );
+		const { sound } = await Audio.Sound.createAsync(
+            require("../assets/music/"+ soundFileName),
+            { volume: .4 }
+        );
 		setSound(sound);
 
 		const status = await sound.getStatusAsync();

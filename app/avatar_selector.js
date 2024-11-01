@@ -58,7 +58,7 @@ export default function AvatarSelector() {
         // Background Sound
 		const { sound } = await Audio.Sound.createAsync(
             require("../assets/music/"+ soundFileName),
-            { isLooping: true }
+            { isLooping: true, volume: .4 }
         );
 		setSound(sound);
 
