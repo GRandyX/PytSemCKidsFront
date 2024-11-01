@@ -156,19 +156,19 @@ export default function Practice() {
 
         switch (operation) {
             case "Suma":
-                view.push( <Image key={"suma"} source={AdditionIMG} style={styles.imageSymbol} /> );
+                view.push( <Image key={"opr_suma"} source={AdditionIMG} style={styles.imageSymbol} /> );
                 break;
 
             case "Resta":
-                view.push( <Image key={"suma"} source={SubtractionIMG} style={styles.imageSymbol} /> );
+                view.push( <Image key={"opr_resta"} source={SubtractionIMG} style={styles.imageSymbol} /> );
                 break;
 
             case "Multiplicación":
-                view.push( <Image key={"suma"} source={MultiplicationIMG} style={styles.imageSymbol} /> );
+                view.push( <Image key={"opr_multiplicacion"} source={MultiplicationIMG} style={styles.imageSymbol} /> );
                 break;
 
             default:
-                view.push( <Image key={"suma"} source={DivisionIMG} style={styles.imageSymbol} /> );
+                view.push( <Image key={"opr_division"} source={DivisionIMG} style={styles.imageSymbol} /> );
                 break;
         }
 
@@ -179,7 +179,7 @@ export default function Practice() {
         let view = [];
 
         for ( let idx = 0; idx < random; idx++ ) {
-            view.push( <Image key={idx} source={symbolsImages[randomImg]} style={styles.image} /> );
+            view.push( <Image key={"practice_digit1_" + idx} source={symbolsImages[randomImg]} style={styles.image} /> );
         }
 
         setDigit1View(view);
@@ -189,7 +189,7 @@ export default function Practice() {
         let view = [];
 
         for ( let idx = 0; idx < random; idx++ ) {
-            view.push( <Image key={idx} source={symbolsImages[randomImg]} style={styles.image} /> );
+            view.push( <Image key={"practice_digit2_" + idx} source={symbolsImages[randomImg]} style={styles.image} /> );
         }
 
         setDigit2View(view);
@@ -199,7 +199,7 @@ export default function Practice() {
         let view = [];
 
         for ( let idx = 0; idx < result; idx++ ) {
-            view.push( <Image key={idx} source={symbolsImages[randomImg]} style={styles.image} /> );
+            view.push( <Image key={"practice_result_" + idx} source={symbolsImages[randomImg]} style={styles.image} /> );
         }
 
         setResultOpView(view);
@@ -304,7 +304,7 @@ export default function Practice() {
                 <View className="flex-row flex-wrap h-full py-5 mt-0 justify-center content-center" style={{ width: "50%" }}>
                     <Pressable onPress={wrongResponseOp}>
                         {({ pressed }) => (
-                            <Image key={"wrong"} source={WrongIMG} className="flex w-auto" style={{ width: 110, height: 110, objectFit: "contain", opacity: pressed ? .5 : 1 }} />
+                            <Image key={"practice_btn_wrong"} source={WrongIMG} className="flex w-auto" style={{ width: 110, height: 110, objectFit: "contain", opacity: pressed ? .5 : 1 }} />
                         )}
                     </Pressable>
                 </View>
@@ -312,7 +312,7 @@ export default function Practice() {
                 <View className="flex-row flex-wrap h-full py-5 mt-0 justify-center content-center" style={{ width: "50%" }}>
                     <Pressable onPress={validResponseOp}>
                         {({ pressed }) => (
-                            <Image key={"check"} source={CheckIMG} className="flex w-auto" style={{ width: 110, height: 110, objectFit: "contain", opacity: pressed ? .5 : 1 }} />
+                            <Image key={"practice_btn_check"} source={CheckIMG} className="flex w-auto" style={{ width: 110, height: 110, objectFit: "contain", opacity: pressed ? .5 : 1 }} />
                         )}
                     </Pressable>
                 </View>

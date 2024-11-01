@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 import AppleIMG from '../assets/images/apple02.png';
+import VideoLayout from "./VideoLayout";
 
 
 export function LearnSubtraction() {
@@ -55,7 +56,8 @@ export function LearnSubtraction() {
         let view = [];
 
         for ( let idx = 0; idx < random; idx++ ) {
-            view.push( <Image key={idx} source={AppleIMG} style={styles.image} /> );
+            // key={"learn_sub_img" + idx}
+            view.push( <Image source={AppleIMG} style={styles.image} /> );
         }
 
         return view;
@@ -118,6 +120,10 @@ export function LearnSubtraction() {
             <Text className="py-2 px-8" style={styles.content}>
                 Así que, en total, te quedan 4 manzanas. ¡Eso es restar! Estás tomando un grupo completo de manzanas y estas quitando unas, y la respuesta es lo que queda.
             </Text>
+
+            <View className="w-full" style={{ maxHeight: 225 }}>
+                <VideoLayout videoId="dxBUiU0J9sg" />
+            </View>
 
         </View>
 

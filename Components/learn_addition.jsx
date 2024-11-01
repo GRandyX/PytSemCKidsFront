@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 import PeachIMG from '../assets/images/peach.png';
+import VideoLayout from "./VideoLayout";
 
 
 export function LearnAddition() {
@@ -55,7 +56,8 @@ export function LearnAddition() {
         let view = [];
 
         for ( let idx = 0; idx < random; idx++ ) {
-            view.push( <Image key={idx} source={PeachIMG} style={styles.image} /> );
+            // key={"learn_add_img" + idx}
+            view.push( <Image source={PeachIMG} style={styles.image} /> );
         }
 
         return view;
@@ -117,6 +119,10 @@ export function LearnAddition() {
             <Text className="py-2 px-8" style={styles.content}>
                 Así que, en total, tienes 5 duraznos. ¡Eso es sumar! Estás tomando dos grupos de duraznos y juntándolos para ver cuántas tienes en total.
             </Text>
+
+            <View className="w-full" style={{ maxHeight: 225 }}>
+                <VideoLayout videoId="eLoJWiucZJE" />
+            </View>
 
         </View>
 

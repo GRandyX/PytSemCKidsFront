@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 import PeachIMG from '../assets/images/peach.png';
+import VideoLayout from "./VideoLayout";
 
 
 export function LearnMultiplication() {
@@ -55,7 +56,8 @@ export function LearnMultiplication() {
         let view = [];
 
         for ( let idx = 0; idx < random; idx++ ) {
-            view.push( <Image key={idx} source={PeachIMG} style={styles.image} /> );
+            // key={"learn_mul_img" + idx}
+            view.push( <Image source={PeachIMG} style={styles.image} /> );
         }
 
         return view;
@@ -119,6 +121,10 @@ export function LearnMultiplication() {
                 Así que, en total, tienes 15 duraznos. ¡Eso es multiplicar! Estás tomando 5 bolsas de duraznos y estas sumando todo su contenido para
                 saber cuántos duraznos tienes en total.
             </Text>
+
+            <View className="w-full" style={{ maxHeight: 225 }}>
+                <VideoLayout videoId="lgPs3UxM2kU" />
+            </View>
 
         </View>
 

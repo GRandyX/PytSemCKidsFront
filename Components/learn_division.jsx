@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 import PeachIMG from '../assets/images/peach.png';
+import VideoLayout from "./VideoLayout";
 
 
 export function LearnDivision() {
@@ -55,7 +56,8 @@ export function LearnDivision() {
         let view = [];
 
         for ( let idx = 0; idx < random; idx++ ) {
-            view.push( <Image key={idx} source={PeachIMG} style={styles.image} /> );
+            // key={"learn_div_img" + idx}
+            view.push( <Image source={PeachIMG} style={styles.image} /> );
         }
 
         return view;
@@ -119,6 +121,10 @@ export function LearnDivision() {
             <Text className="py-2 px-8" style={styles.content}>
                 Así que, debes dar a cada uno 3 manzanas. ¡Eso es dividir! Estás tomando el grupo de duraznos y los estas separando en partes iguales, para saber cuántas debes repartir.
             </Text>
+
+            <View className="w-full" style={{ maxHeight: 225 }}>
+                <VideoLayout videoId="8QL-Rws-VXM" />
+            </View>
 
         </View>
 

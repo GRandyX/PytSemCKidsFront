@@ -86,7 +86,7 @@ export default function AvatarSelector() {
     };
 
     const rendererPressableChar = (idChar, nameChar, source) => {
-        return <View key={idChar}>
+        return <View key={"avatar_" + idChar}>
             <Pressable onPress={ () => { goToHome(idChar, nameChar) }}>
                 {
                     ({ pressed }) => (
