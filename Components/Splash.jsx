@@ -82,7 +82,7 @@ export function Splash() {
 
 		const { sound } = await Audio.Sound.createAsync(
             require("../assets/music/"+ soundFileName),
-            { volume: .4 }
+            { volume: .2 }
         );
 		setSound(sound);
 
