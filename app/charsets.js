@@ -1,29 +1,27 @@
-
-
 export const Characters = [
     {
         id: 1,
-        name: "Nicolas",
+        name: "Randy",
         source: require('../assets/images/chars/char1.png')
     },
     {
         id: 2,
-        name: "Marta",
+        name: "Ignacio",
         source: require('../assets/images/chars/char2.png')
     },
     {
         id: 3,
-        name: "Pedro",
+        name: "Carlos",
         source: require('../assets/images/chars/char3.png')
     },
     {
         id: 4,
-        name: "Patric",
+        name: "Gabriela",
         source: require('../assets/images/chars/char4.png')
     },
     {
         id: 5,
-        name: "Oscar",
+        name: "Alfonso",
         source: require('../assets/images/chars/char5.png')
     }
 ];

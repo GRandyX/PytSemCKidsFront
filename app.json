@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.umgsem1grupo4.calcukid"
     },
     "web": {
       "favicon": "./assets/favicon.png"

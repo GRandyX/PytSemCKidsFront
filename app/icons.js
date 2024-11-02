@@ -7,3 +7,7 @@ export const GamepadIco = (props) => (
 export const CircleALeft = (props) => (
     <FontAwesome6 name="circle-arrow-left" size={32} color="white" {... props} />
 );
+
+export const EqualsIco = (props) => (
+    <FontAwesome6 name="equals" size={32} color="white" {... props} />
+);
